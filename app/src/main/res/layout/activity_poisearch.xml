@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:background="#FFFF"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="        在      " />
+
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                 />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="    内找    ">
+
+            </TextView>
+
+            <AutoCompleteTextView
+                android:id="@+id/searchkey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.88"
+                android:hint="请输入目的地" />
+        </LinearLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="40dip"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="12"
+                android:onClick="searchButtonProcess"
+                android:padding="10dip"
+                android:text="位置查找"
+                />
+
+            <Button
+                android:id="@+id/searchNearby"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="12"
+                android:onClick="searchRoute"
+                android:padding="10dip"
+                android:text="路线查找" />
+
+
+            <Button
+                android:id="@+id/button_location"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="12"
+                android:padding="10dip"
+                android:textColor="#ffffff"
+                android:text="普通模式"/>
+        </LinearLayout>
+
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/bmapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
+        <!--<fragment
+            android:id="@+id/map"
+            class="com.baidu.mapapi.map.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />-->
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

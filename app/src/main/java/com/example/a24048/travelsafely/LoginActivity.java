@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.example.a24048.travelsafely.java.JellyInterpolator;
 
-import butterknife.ButterKnife;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,7 +34,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
-        ButterKnife.bind(this);
         initView();
     }
 
