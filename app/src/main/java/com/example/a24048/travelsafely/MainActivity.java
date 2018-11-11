@@ -11,14 +11,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Button button  = findViewById(R.id.map_main);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent  = new Intent(MainActivity.this, com.example.a24048.travelsafely.map.MainActivity.class);
-                startActivity(intent);
-            }
-        });
+ //       setContentView(R.layout.activity_main);
+//        Button button  = findViewById(R.id.map_main);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent  = new Intent(MainActivity.this, com.example.a24048.travelsafely.map.MainActivity.class);
+//                String city = "中北大学";
+//                intent.putExtra("location",city);
+//                startActivity(intent);
+//
+//            }
+//        });
     }
 }

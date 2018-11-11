@@ -106,6 +106,12 @@
                     android:layout_weight="1.0"
                     android:background="@drawable/next_"
                     android:onClick="nodeClick" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/map_done"
+                    android:background="@drawable/ic_finish"
+                    android:onClick="nodeClick"/>
             </LinearLayout>
         </RelativeLayout>
 

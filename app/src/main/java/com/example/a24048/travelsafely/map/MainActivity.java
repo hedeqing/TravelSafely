@@ -11,6 +11,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -38,6 +39,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 
+import com.awais.fingerprintdialoglib.listeners.DialogCallBack;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -85,6 +87,8 @@ import com.baidu.mapapi.search.sug.SuggestionSearchOption;
 import com.example.a24048.travelsafely.R;
 
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,7 +103,7 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements OnGetPoiSearchResultListener,
-        OnGetSuggestionResultListener, SensorEventListener {
+        OnGetSuggestionResultListener, SensorEventListener  {
 
 
     private BaiduMap mBaiduMap=null;
@@ -149,6 +153,15 @@ public class MainActivity extends AppCompatActivity implements OnGetPoiSearchRes
         requestWindowFeature(Window.FEATURE_NO_TITLE);// 设置标题栏不可用
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_poisearch);
+
+
+
+
+
+
+
+
+
 
         // 初始化搜索模块，注册搜索事件监听
         mPoiSearch = PoiSearch.newInstance();
@@ -335,8 +348,12 @@ public class MainActivity extends AppCompatActivity implements OnGetPoiSearchRes
             mLocClient.stop();
             isLocated=false;
         }
+        Intent intent = getIntent();
+        String city = intent.getStringExtra("locaton");
         searchType = 1;
         String citystr = editCity.getText().toString();
+
+        keyWorldsView.setText(city);
         String keystr = keyWorldsView.getText().toString();
         mPoiSearch.searchInCity((new PoiCitySearchOption())
                 .city(citystr).keyword(keystr).pageNum(loadIndex));
@@ -433,6 +450,7 @@ public class MainActivity extends AppCompatActivity implements OnGetPoiSearchRes
         keyWorldsView.setAdapter(sugAdapter);
         sugAdapter.notifyDataSetChanged();
     }
+
 
     private class MyPoiOverlay extends PoiOverlay {
 

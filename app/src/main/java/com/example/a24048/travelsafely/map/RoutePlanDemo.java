@@ -1,17 +1,25 @@
 package com.example.a24048.travelsafely.map;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.hardware.fingerprint.FingerprintManager;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -23,6 +31,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.awais.fingerprintdialoglib.listeners.DialogCallBack;
+import com.awais.fringerprintdialog.handlers.PrintDialogHelper;
+import com.example.a24048.travelsafely.fingerDialog.FingerActivity;
+import com.example.a24048.travelsafely.fingerDialog.Utils;
+import com.example.a24048.travelsafely.fingerDialog.Utils.Companion.*;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -64,8 +77,9 @@ import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.example.a24048.travelsafely.R;
 
-import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 /**
  * 如何进行驾车、步行、公交、骑行、综合路线搜索
  * 并在地图使用RouteOverlay、TransitOverlay绘制
@@ -74,7 +88,7 @@ import java.util.List;
  */
 
 public class RoutePlanDemo extends AppCompatActivity implements BaiduMap.OnMapClickListener,
-        OnGetRoutePlanResultListener, OnGetSuggestionResultListener, SensorEventListener {
+        OnGetRoutePlanResultListener, OnGetSuggestionResultListener, SensorEventListener,DialogCallBack {
     // 浏览路线节点相关
     Button mBtnPre = null; // 上一个节点
     Button mBtnNext = null; // 下一个节点
@@ -121,12 +135,27 @@ public class RoutePlanDemo extends AppCompatActivity implements BaiduMap.OnMapCl
     private float mCurrentAccracy;
     private String mCurrentCity;
 
+    //
+    private  final int fingerPrintPermission = 9;
+    private PrintDialogHelper printDialogHelper = null;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);// 设置标题栏不可用
         setContentView(R.layout.activity_routeplan);
         CharSequence titleLable = "路线规划功能";
         setTitle(titleLable);
+
+
+    Button button = findViewById(R.id.map_done);
+    button.setOnClickListener(new View.OnClickListener() {
+        @RequiresApi(api = Build.VERSION_CODES.M)
+        @Override
+        public void onClick(View v) {
+            checkForPermission();
+        }
+    });
+
+
 
         Intent intent = getIntent();
         mCurrentCity = intent.getStringExtra("currentCity");//获取当前城市
@@ -135,6 +164,13 @@ public class RoutePlanDemo extends AppCompatActivity implements BaiduMap.OnMapCl
         if(startNodeStr==null){
             startNodeStr="山东大学(威海校区)";
         }
+
+
+//ceshi
+
+
+
+
 
 
         initGPS();//检查GPS定位
@@ -252,8 +288,6 @@ public class RoutePlanDemo extends AppCompatActivity implements BaiduMap.OnMapCl
         requestLocButton.setOnClickListener(btnClickListener);
 
     }
-
-
 
     /**
      * 发起路线规划搜索示例
@@ -976,4 +1010,58 @@ public class RoutePlanDemo extends AppCompatActivity implements BaiduMap.OnMapCl
     }
 
 
+
+
+
+
+    @Override
+    public void onCancel(@NotNull String message) {
+        Utils.Companion.alertDialog(this,message);
+    }
+
+    @Override
+    public void onSuccess(@NotNull String message, @NotNull FingerprintManager.AuthenticationResult result) {
+        Utils.Companion.alertDialog(this,message);
+    }
+
+    @Override
+    public void onError(@NotNull String message) {
+        Utils.Companion.alertDialog(this,message);
+    }
+
+    @Override
+    public void onFailed(@NotNull String message) {
+        if (message.contains("too many attempts")) {
+            Utils.Companion.alertDialog(this,message);
+        }
+    }
+
+    @Override
+    public void onHelp(@NotNull String message) {
+
+    }
+
+    private void callFingerPrint() {
+        if (printDialogHelper == null) {
+            printDialogHelper = new  PrintDialogHelper();
+        }
+        printDialogHelper.init(this, this);
+    }
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void checkForPermission() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.USE_FINGERPRINT}, fingerPrintPermission);
+            Utils.Companion.alertDialog(this, "Please enable the fingerprint permission");
+        } else {
+            callFingerPrint();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+        }
+    }
 }

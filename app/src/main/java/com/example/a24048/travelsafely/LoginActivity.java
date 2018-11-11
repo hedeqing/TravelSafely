@@ -5,6 +5,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.a24048.travelsafely.java.JellyInterpolator;
+import com.example.a24048.travelsafely.map.MainActivity;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -38,7 +40,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initView() {
-
         mBtnLogin = findViewById(R.id.main_btn_login);
         progress = findViewById(R.id.layout_progress);
         mInputLayout = findViewById(R.id.input_layout);
@@ -58,6 +59,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mPsw.setVisibility(View.INVISIBLE);
 
         inputAnimator(mInputLayout, mWidth, mHeight);
+
+
 
     }
 
@@ -115,6 +118,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 progress.setVisibility(View.VISIBLE);
                 progressAnimator(progress);
                 mInputLayout.setVisibility(View.INVISIBLE);
+                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(intent);
+                finish();
 
             }
 
