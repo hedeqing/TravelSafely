@@ -14,12 +14,12 @@
     <string name="start_btn">Start</string>
     <string name="cancel_btn">Cancel</string>
 
-    <string name="fingerprint_success">Fingerprint recognized.</string>
-    <string name="fingerprint_not_recognized">Fingerprint not recognized. Try again.</string>
+    <string name="fingerprint_success">指纹识别成功</string>
+    <string name="fingerprint_not_recognized">指纹识别失败，请重新识别</string>
 
     <!-- Dialog info -->
-    <string name="no_sensor_dialog_title">No fingerprint sensor</string>
-    <string name="no_sensor_dialog_message">No fingerprint sensor on your device, click cancel to exit.</string>
+    <string name="no_sensor_dialog_title">没有检测到指纹</string>
+    <string name="no_sensor_dialog_message">没有检测到指纹</string>
     <string name="no_fingerprint_enrolled_dialog_title">No fingerprint enrolled</string>
     <string name="no_fingerprint_enrolled_dialog_message">No fingerprint enrolled, enter\n
         <font fgcolor="green">Setting->Security->Nexus Imprint\n</font>

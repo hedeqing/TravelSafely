@@ -92,6 +92,7 @@ public class RoutePlanDemo extends AppCompatActivity implements BaiduMap.OnMapCl
     // 浏览路线节点相关
     Button mBtnPre = null; // 上一个节点
     Button mBtnNext = null; // 下一个节点
+    Button finishButton = null;
     int nodeIndex = -1; // 节点索引,供浏览节点时使用
     RouteLine route = null;
     MassTransitRouteLine massroute = null;
@@ -146,15 +147,14 @@ public class RoutePlanDemo extends AppCompatActivity implements BaiduMap.OnMapCl
         setTitle(titleLable);
 
 
-    Button button = findViewById(R.id.map_done);
-    button.setOnClickListener(new View.OnClickListener() {
-        @RequiresApi(api = Build.VERSION_CODES.M)
-        @Override
-        public void onClick(View v) {
-            checkForPermission();
-        }
-    });
-
+        finishButton = findViewById(R.id.map_done);
+        finishButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View v) {
+                checkForPermission();
+            }
+        });
 
 
         Intent intent = getIntent();
@@ -181,6 +181,7 @@ public class RoutePlanDemo extends AppCompatActivity implements BaiduMap.OnMapCl
         mBtnPre = (Button) findViewById(R.id.pre);
         mBtnNext = (Button) findViewById(R.id.next);
         mBtnPre.setVisibility(View.INVISIBLE);
+        finishButton.setVisibility(View.INVISIBLE);
         mBtnNext.setVisibility(View.INVISIBLE);
         // 地图点击事件处理
         mBaidumap.setOnMapClickListener(this);
@@ -299,6 +300,7 @@ public class RoutePlanDemo extends AppCompatActivity implements BaiduMap.OnMapCl
         route = null;
         mBtnPre.setVisibility(View.INVISIBLE);
         mBtnNext.setVisibility(View.INVISIBLE);
+        finishButton.setVisibility(View.INVISIBLE);
         mBaidumap.clear();
         // 处理搜索按钮响应
         // 设置起终点信息，对于tranist search 来说，城市名无意义
@@ -421,6 +423,7 @@ public class RoutePlanDemo extends AppCompatActivity implements BaiduMap.OnMapCl
             nodeIndex = -1;
             mBtnPre.setVisibility(View.VISIBLE);
             mBtnNext.setVisibility(View.VISIBLE);
+            finishButton.setVisibility(View.VISIBLE);
 
             if (result.getRouteLines().size() > 1) {
                 nowResultwalk = result;
@@ -484,6 +487,7 @@ public class RoutePlanDemo extends AppCompatActivity implements BaiduMap.OnMapCl
             nodeIndex = -1;
             mBtnPre.setVisibility(View.VISIBLE);
             mBtnNext.setVisibility(View.VISIBLE);
+            finishButton.setVisibility(View.VISIBLE);
 
 
             if (result.getRouteLines().size() > 1) {
@@ -550,6 +554,7 @@ public class RoutePlanDemo extends AppCompatActivity implements BaiduMap.OnMapCl
             nodeIndex = -1;
             mBtnPre.setVisibility(View.VISIBLE);
             mBtnNext.setVisibility(View.VISIBLE);
+            finishButton.setVisibility(View.VISIBLE);
 
             if (!hasShownDialogue) {
                 // 列表选择
@@ -647,6 +652,7 @@ public class RoutePlanDemo extends AppCompatActivity implements BaiduMap.OnMapCl
                 overlay.zoomToSpan();
                 mBtnPre.setVisibility(View.VISIBLE);
                 mBtnNext.setVisibility(View.VISIBLE);
+                finishButton.setVisibility(View.VISIBLE);
             } else {
                 Log.d("route result", "结果数<0");
                 return;
@@ -685,6 +691,8 @@ public class RoutePlanDemo extends AppCompatActivity implements BaiduMap.OnMapCl
             nodeIndex = -1;
             mBtnPre.setVisibility(View.VISIBLE);
             mBtnNext.setVisibility(View.VISIBLE);
+            finishButton.setVisibility(View.VISIBLE);
+
 
             if (result.getRouteLines().size() > 1) {
                 nowResultbike = result;
@@ -723,6 +731,8 @@ public class RoutePlanDemo extends AppCompatActivity implements BaiduMap.OnMapCl
                 overlay.zoomToSpan();
                 mBtnPre.setVisibility(View.VISIBLE);
                 mBtnNext.setVisibility(View.VISIBLE);
+                finishButton.setVisibility(View.VISIBLE);
+
             } else {
                 Log.d("route result", "结果数<0");
                 return;
@@ -997,6 +1007,7 @@ public class RoutePlanDemo extends AppCompatActivity implements BaiduMap.OnMapCl
                     onItemInDlgClickListener.onItemClick(position);
                     mBtnPre.setVisibility(View.VISIBLE);
                     mBtnNext.setVisibility(View.VISIBLE);
+                    finishButton.setVisibility(View.VISIBLE);
                     dismiss();
                     hasShownDialogue = false;
                 }

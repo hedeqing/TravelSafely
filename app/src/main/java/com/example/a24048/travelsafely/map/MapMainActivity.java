@@ -84,6 +84,7 @@ import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearchOption;
+import com.example.a24048.travelsafely.LoginActivity;
 import com.example.a24048.travelsafely.R;
 
 
@@ -91,6 +92,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *  主函数
@@ -102,7 +104,7 @@ import java.util.List;
 
 
 
-public class MainActivity extends AppCompatActivity implements OnGetPoiSearchResultListener,
+public class MapMainActivity extends AppCompatActivity implements OnGetPoiSearchResultListener,
         OnGetSuggestionResultListener, SensorEventListener  {
 
 
@@ -150,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements OnGetPoiSearchRes
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
-        requestWindowFeature(Window.FEATURE_NO_TITLE);// 设置标题栏不可用
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);// 设置标题栏不可用
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_poisearch);
 
@@ -252,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements OnGetPoiSearchRes
                 // 获取到权限，作相应处理（调用定位SDK应当确保相关权限均被授权，否则可能引起定位失败）
             } else{
                 // 没有获取到权限，做特殊处理
-                Toast.makeText(MainActivity.this,"没有位置权限可能导致地图不显示或者定位不准确！", Toast.LENGTH_LONG).show();
+                Toast.makeText(MapMainActivity.this,"没有位置权限可能导致地图不显示或者定位不准确！", Toast.LENGTH_LONG).show();
             }
             break;
             default:
@@ -361,12 +363,12 @@ public class MainActivity extends AppCompatActivity implements OnGetPoiSearchRes
 
     public void searchRoute(View v){
         if(keyWorldsView.getText().toString().isEmpty()){
-            Toast.makeText(MainActivity.this, "您还没填写地点", Toast.LENGTH_LONG)
+            Toast.makeText(MapMainActivity.this, "您还没填写地点", Toast.LENGTH_LONG)
                     .show();
         }else{
-            Log.d("MainActivity", "address: "+ address);
+            Log.d("MapMainActivity", "address: "+ address);
 
-            Intent intent = new Intent(MainActivity.this,RoutePlanDemo.class);
+            Intent intent = new Intent(MapMainActivity.this,RoutePlanDemo.class);
             intent.putExtra("currentCity",myCurrentCity);//传值当前城市
             intent.putExtra("start", address);//传值当前地址
             //传值终点地址其实不准确
@@ -388,7 +390,7 @@ public class MainActivity extends AppCompatActivity implements OnGetPoiSearchRes
      */
     public void onGetPoiResult(PoiResult result) {
         if (result == null || result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
-            Toast.makeText(MainActivity.this, "未找到结果", Toast.LENGTH_LONG)
+            Toast.makeText(MapMainActivity.this, "未找到结果", Toast.LENGTH_LONG)
                     .show();
             return;
         }
@@ -412,7 +414,7 @@ public class MainActivity extends AppCompatActivity implements OnGetPoiSearchRes
                 strInfo += ",";
             }
             strInfo += "找到结果";
-            Toast.makeText(MainActivity.this, strInfo, Toast.LENGTH_LONG)
+            Toast.makeText(MapMainActivity.this, strInfo, Toast.LENGTH_LONG)
                     .show();
         }
     }
@@ -423,10 +425,10 @@ public class MainActivity extends AppCompatActivity implements OnGetPoiSearchRes
      */
     public void onGetPoiDetailResult(PoiDetailResult result) {
         if (result.error != SearchResult.ERRORNO.NO_ERROR) {
-            Toast.makeText(MainActivity.this, "抱歉，未找到结果", Toast.LENGTH_SHORT)
+            Toast.makeText(MapMainActivity.this, "抱歉，未找到结果", Toast.LENGTH_SHORT)
                     .show();
         } else {
-            Toast.makeText(MainActivity.this, result.getName() + ": " + result.getAddress(), Toast.LENGTH_SHORT)
+            Toast.makeText(MapMainActivity.this, result.getName() + ": " + result.getAddress(), Toast.LENGTH_SHORT)
                     .show();
         }
     }
@@ -446,7 +448,7 @@ public class MainActivity extends AppCompatActivity implements OnGetPoiSearchRes
                 suggest.add(info.key);
             }
         }
-        sugAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_dropdown_item_1line, suggest);
+        sugAdapter = new ArrayAdapter<String>(MapMainActivity.this, android.R.layout.simple_dropdown_item_1line, suggest);
         keyWorldsView.setAdapter(sugAdapter);
         sugAdapter.notifyDataSetChanged();
     }
@@ -506,12 +508,12 @@ public class MainActivity extends AppCompatActivity implements OnGetPoiSearchRes
                 return;
             }
             mCurrentLat = location.getLatitude();
-            //Log.d("MainActivity", "Latitude: "+mCurrentLat);
+            //Log.d("MapMainActivity", "Latitude: "+mCurrentLat);
             mCurrentLon = location.getLongitude();
-            //Log.d("MainActivity", "Longitude: "+mCurrentLon);
+            //Log.d("MapMainActivity", "Longitude: "+mCurrentLon);
             mCurrentAccracy = location.getRadius();
             address= location.getAddrStr();
-            //Log.d("MainActivity", "address: "+address);
+            //Log.d("MapMainActivity", "address: "+address);
 
             myCurrentCity=location.getCity();
             if(myCurrentCity.isEmpty()){
@@ -519,7 +521,7 @@ public class MainActivity extends AppCompatActivity implements OnGetPoiSearchRes
             }else{
                 editCity.setText(myCurrentCity);
             }
-            //Log.d("MainActivity", "city: "+myCurrentCity);
+            //Log.d("MapMainActivity", "city: "+myCurrentCity);
             locData = new MyLocationData.Builder()
                     .accuracy(location.getRadius())
                     // 此处设置开发者获取到的方向信息，顺时针0-360

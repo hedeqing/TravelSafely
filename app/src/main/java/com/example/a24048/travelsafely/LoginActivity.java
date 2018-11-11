@@ -6,7 +6,9 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +18,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.a24048.travelsafely.java.JellyInterpolator;
-import com.example.a24048.travelsafely.map.MainActivity;
+import com.example.a24048.travelsafely.map.MapMainActivity;
 
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity  {
 
     private TextView mBtnLogin;
+    private  TextView mBtnSignup;
 
     private View progress;
 
@@ -31,11 +34,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private LinearLayout mName, mPsw;
 
+    SharedPreferences sprfMain;
+    SharedPreferences.Editor editorMain;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        sprfMain= PreferenceManager.getDefaultSharedPreferences(this);
+//        editorMain=sprfMain.edit();
+//        if(sprfMain.getBoolean("mapmain",false)){
+//            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+//            startActivity(intent);
+//            LoginActivity.this.finish();
+//        }
+
         setContentView(R.layout.activity_login);
+        CharSequence titleLable = "";
+        setTitle(titleLable);
+
         initView();
     }
 
@@ -45,24 +61,46 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mInputLayout = findViewById(R.id.input_layout);
         mName =  findViewById(R.id.input_layout_name);
         mPsw = findViewById(R.id.input_layout_psw);
-        mBtnLogin.setOnClickListener(this);
+        mBtnSignup = findViewById(R.id.sign_up);
+        mBtnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
+        mBtnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 计算出控件的高与宽
+                mWidth = mBtnLogin.getMeasuredWidth();
+                mHeight = mBtnLogin.getMeasuredHeight();
+                // 隐藏输入框
+                mName.setVisibility(View.INVISIBLE);
+                mPsw.setVisibility(View.INVISIBLE);
+
+                inputAnimator(mInputLayout, mWidth, mHeight);
+
+
+            }
+        });
     }
 
-    @Override
-    public void onClick(View v) {
-
-        // 计算出控件的高与宽
-        mWidth = mBtnLogin.getMeasuredWidth();
-        mHeight = mBtnLogin.getMeasuredHeight();
-        // 隐藏输入框
-        mName.setVisibility(View.INVISIBLE);
-        mPsw.setVisibility(View.INVISIBLE);
-
-        inputAnimator(mInputLayout, mWidth, mHeight);
-
-
-
-    }
+//    @Override
+//    public void onClick(View v) {
+//
+//        // 计算出控件的高与宽
+//        mWidth = mBtnLogin.getMeasuredWidth();
+//        mHeight = mBtnLogin.getMeasuredHeight();
+//        // 隐藏输入框
+//        mName.setVisibility(View.INVISIBLE);
+//        mPsw.setVisibility(View.INVISIBLE);
+//
+//        inputAnimator(mInputLayout, mWidth, mHeight);
+//
+//
+//
+//    }
 
     /**
      * 输入框的动画效果
@@ -118,9 +156,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 progress.setVisibility(View.VISIBLE);
                 progressAnimator(progress);
                 mInputLayout.setVisibility(View.INVISIBLE);
-                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this,MapMainActivity.class);
+//                editorMain.putBoolean("mapmain",true);
+//                editorMain.commit();
                 startActivity(intent);
-                finish();
+                LoginActivity.this.finish();
 
             }
 

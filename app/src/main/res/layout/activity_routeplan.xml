@@ -15,6 +15,7 @@
             android:layout_marginBottom="5dip"
             android:layout_marginTop="5dip"
             android:orientation="horizontal"
+            android:background="@color/colorPrimary"
             >
 
 
@@ -89,28 +90,28 @@
 
                 <Button
                     android:id="@+id/pre"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginLeft="2dip"
                     android:layout_marginRight="2dip"
                     android:layout_weight="1.0"
-                    android:background="@drawable/pre_"
+                    android:background="@drawable/ic_left"
                     android:onClick="nodeClick" />
 
                 <Button
                     android:id="@+id/next"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginLeft="2dip"
                     android:layout_marginRight="2dip"
                     android:layout_weight="1.0"
-                    android:background="@drawable/next_"
+                    android:background="@drawable/ic_right"
                     android:onClick="nodeClick" />
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:id="@+id/map_done"
-                    android:background="@drawable/ic_finish"
+                    android:background="@drawable/ic_arrive"
                     android:onClick="nodeClick"/>
             </LinearLayout>
         </RelativeLayout>

@@ -68,11 +68,11 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
+        android:icon="@drawable/ic_pinche"
+        android:label="高校拼车平台"
+        android:roundIcon="@drawable/ic_pinche"
         android:theme="@style/AppTheme">
+        >
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="SfPUaG5XWWImOYVGz2zPGWEZX4vn3nDo" />
@@ -82,17 +82,18 @@
             android:enabled="true"
             android:process=":remote" />
 
-        <activity android:name=".map.MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".map.RoutePlanDemo"/>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".fingerprintUnlock.FingerActivity" />
+        <activity android:name=".map.MapMainActivity" />
+        <activity android:name=".map.RoutePlanDemo" />
+        <activity android:name=".driver.DriverActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".driver.DriverSendActivity"></activity>
     </application>
 
 </manifest>
