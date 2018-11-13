@@ -11,5 +11,7 @@ public class DriverSendActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_send);
+        CharSequence titleLable = "车主";
+        setTitle(titleLable);
     }
 }
