@@ -17,6 +17,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.a24048.travelsafely.driver.DriverCheckActivity;
 import com.example.a24048.travelsafely.java.JellyInterpolator;
 import com.example.a24048.travelsafely.map.MapMainActivity;
 
@@ -62,10 +63,18 @@ public class LoginActivity extends AppCompatActivity  {
         mName =  findViewById(R.id.input_layout_name);
         mPsw = findViewById(R.id.input_layout_psw);
         mBtnSignup = findViewById(R.id.sign_up);
+        TextView pas = findViewById(R.id.main_btn_forget_password);
         mBtnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
+        pas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,DriverCheckActivity.class);
                 startActivity(intent);
             }
         });

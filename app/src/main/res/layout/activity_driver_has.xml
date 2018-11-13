@@ -1,15 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent" >-->
-
-    <!--<ListView-->
-        <!--android:id="@+id/listView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" >-->
-    <!--</ListView>-->
-
-<!--</RelativeLayout>-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.a24048.travelsafely.driver.DriverCheckActivity">
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
@@ -38,7 +27,7 @@
             android:textSize="30dp"/>
     </LinearLayout>
     <RelativeLayout
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="110dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <com.hankkin.library.RefreshSwipeMenuListView
@@ -47,4 +36,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="470dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="10dp"
+        app:fabSize="auto"
+        android:background="@color/white"
+        android:pointerIcon="text"
+        android:backgroundTint="@color/white"
+        app:borderWidth="0dp"
+        app:elevation="10dp"
+       android:src="@drawable/add2"
+        app:pressedTranslationZ="20dp"
+        app:rippleColor="@color/white"/>
+
 </FrameLayout>

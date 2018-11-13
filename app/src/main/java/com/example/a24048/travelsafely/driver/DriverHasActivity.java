@@ -1,17 +1,14 @@
 package com.example.a24048.travelsafely.driver;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ListView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
@@ -21,32 +18,12 @@ import com.hankkin.library.SwipeMenu;
 import com.hankkin.library.SwipeMenuCreator;
 import com.hankkin.library.SwipeMenuItem;
 
-import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DriverCheckActivity extends AppCompatActivity implements RefreshSwipeMenuListView.OnRefreshListener {
+public class DriverHasActivity extends AppCompatActivity implements RefreshSwipeMenuListView.OnRefreshListener {
 
-//    private ListView mListView;
-//
-//    private MyAdapter mAdapter;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState)
-//    {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_driver_check);
-//
-//        mListView =findViewById(R.id.listView);
-//
-//        DisplayMetrics dm = new DisplayMetrics();
-//        getWindowManager().getDefaultDisplay().getMetrics(dm);
-//
-//        mAdapter = new MyAdapter(this, dm.widthPixels);
-//        //ListView
-//        mListView.setAdapter(mAdapter);
-//    }
-private RefreshSwipeMenuListView rsmLv;
+    private RefreshSwipeMenuListView rsmLv;
     private List<MsgBean> data;
     private MessageAdapter adapter;
     private int po;
@@ -54,11 +31,11 @@ private RefreshSwipeMenuListView rsmLv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driver_check);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_driver_has);
+        CharSequence titleLable = "已选择的乘客";
+        Toolbar toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_back3);
-        CharSequence titleLable = "乘客";
         setTitle(titleLable);
         rsmLv = findViewById(R.id.swipe);
         data = new ArrayList<>();
@@ -66,7 +43,7 @@ private RefreshSwipeMenuListView rsmLv;
 
         initData();
 
-        adapter = new MessageAdapter(DriverCheckActivity.this,data);
+        adapter = new MessageAdapter(DriverHasActivity.this,data);
 
         rsmLv.setAdapter(adapter);
         rsmLv.setListViewMode(RefreshSwipeMenuListView.HEADER);
@@ -76,29 +53,29 @@ private RefreshSwipeMenuListView rsmLv;
             @Override
             public void create(SwipeMenu menu) {
                 // 创建滑动选项
-                SwipeMenuItem rejectItem = new SwipeMenuItem(
-                        getApplicationContext());
-                // 设置选项背景
-                rejectItem.setBackground(new ColorDrawable(getResources().getColor(R.color.red)));
-                // 设置选项宽度
-                rejectItem.setWidth(dp2px(80,getApplicationContext()));
-                // 设置选项标题
-                rejectItem.setTitle("添加");
-                // 设置选项标题
-                rejectItem.setTitleSize(16);
-                // 设置选项标题颜色
-                rejectItem.setTitleColor(Color.WHITE);
-                // 添加选项
-                menu.addMenuItem(rejectItem);
+//                SwipeMenuItem rejectItem = new SwipeMenuItem(
+//                        getApplicationContext());
+//                // 设置选项背景
+//                rejectItem.setBackground(new ColorDrawable(getResources().getColor(R.color.red)));
+//                // 设置选项宽度
+//                rejectItem.setWidth(dp2px(80,getApplicationContext()));
+//                // 设置选项标题
+//                rejectItem.setTitle("添加");
+//                // 设置选项标题
+//                rejectItem.setTitleSize(16);
+//                // 设置选项标题颜色
+//                rejectItem.setTitleColor(Color.WHITE);
+//                // 添加选项
+//                menu.addMenuItem(rejectItem);
 
-//                // 创建删除选项
-//                SwipeMenuItem argeeItem = new SwipeMenuItem(getApplicationContext());
-//                argeeItem.setBackground(new ColorDrawable(getResources().getColor(R.color.green)));
-//                argeeItem.setWidth(dp2px(80, getApplicationContext()));
-//                argeeItem.setTitle("删除");
-//                argeeItem.setTitleSize(16);
-//                argeeItem.setTitleColor(Color.WHITE);
-//                menu.addMenuItem(argeeItem);
+                // 创建删除选项
+                SwipeMenuItem argeeItem = new SwipeMenuItem(getApplicationContext());
+                argeeItem.setBackground(new ColorDrawable(getResources().getColor(R.color.green)));
+                argeeItem.setWidth(dp2px(80, getApplicationContext()));
+                argeeItem.setTitle("删除");
+                argeeItem.setTitleSize(16);
+                argeeItem.setTitleColor(Color.WHITE);
+                menu.addMenuItem(argeeItem);
             }
         };
 
@@ -109,7 +86,7 @@ private RefreshSwipeMenuListView rsmLv;
             public void onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch (index) {
                     case 0: //第一个选项
-                        Toast.makeText(DriverCheckActivity.this,"您点击的是置顶",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DriverHasActivity.this,"您点击的是置顶",Toast.LENGTH_SHORT).show();
                         break;
                     case 1: //第二个选项
                         del(position,rsmLv.getChildAt(position+1-rsmLv.getFirstVisiblePosition()));
@@ -123,16 +100,16 @@ private RefreshSwipeMenuListView rsmLv;
 
 
     private void initData(){
-            MsgBean msgBean = new MsgBean();
-            msgBean.setName("王天锐");
-            msgBean.setContent("中北大学→柳巷");
-            msgBean.setTime("10 : 30-10 : 50");
-            data.add(msgBean);
-            MsgBean msgBean2 = new MsgBean();
-            msgBean2.setName("郑豪");
-            msgBean2.setContent("中北大学→太原南站");
-            msgBean2.setTime("10 : 10-10 : 20");
-            data.add(msgBean2);
+        MsgBean msgBean = new MsgBean();
+        msgBean.setName("王天锐");
+        msgBean.setContent("中北大学→柳巷");
+        msgBean.setTime("10 : 30-10 : 50");
+        data.add(msgBean);
+        MsgBean msgBean2 = new MsgBean();
+        msgBean2.setName("郑豪");
+        msgBean2.setContent("中北大学→太原南站");
+        msgBean2.setTime("10 : 10-10 : 20");
+        data.add(msgBean2);
 
     }
 
@@ -164,7 +141,7 @@ private RefreshSwipeMenuListView rsmLv;
             @Override
             public void run() {
                 rsmLv.complete();
-                Toast.makeText(DriverCheckActivity.this,"已完成",Toast.LENGTH_SHORT).show();
+                Toast.makeText(DriverHasActivity.this,"已完成",Toast.LENGTH_SHORT).show();
             }
         },2000);
     }
@@ -175,7 +152,7 @@ private RefreshSwipeMenuListView rsmLv;
             @Override
             public void run() {
                 rsmLv.complete();
-                Toast.makeText(DriverCheckActivity.this,"已完成",Toast.LENGTH_SHORT).show();
+                Toast.makeText(DriverHasActivity.this,"已完成",Toast.LENGTH_SHORT).show();
             }
         },2000);
 
@@ -184,5 +161,10 @@ private RefreshSwipeMenuListView rsmLv;
     public  int dp2px(int dp, Context context) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
                 context.getResources().getDisplayMetrics());
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }
