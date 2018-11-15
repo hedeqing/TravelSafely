@@ -7,17 +7,21 @@ import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
 import com.example.a24048.travelsafely.driver.DriverCheckActivity;
+import com.example.a24048.travelsafely.driver.DriverHasActivity;
 import com.example.a24048.travelsafely.java.JellyInterpolator;
 import com.example.a24048.travelsafely.map.MapMainActivity;
 
@@ -50,9 +54,13 @@ public class LoginActivity extends AppCompatActivity  {
 //        }
 
         setContentView(R.layout.activity_login);
-        CharSequence titleLable = "";
-        setTitle(titleLable);
-
+        Toolbar toolbar = findViewById(R.id.toolbar_login);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)     {
+            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
+            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+        }
         initView();
     }
 
@@ -74,7 +82,7 @@ public class LoginActivity extends AppCompatActivity  {
         pas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,DriverCheckActivity.class);
+                Intent intent = new Intent(LoginActivity.this,DriverHasActivity.class);
                 startActivity(intent);
             }
         });

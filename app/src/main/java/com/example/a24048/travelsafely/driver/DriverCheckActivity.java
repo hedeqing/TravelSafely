@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ListView;
@@ -55,11 +57,20 @@ private RefreshSwipeMenuListView rsmLv;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_check);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        Toolbar toolbar = findViewById(R.id.toolbar_check);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
         toolbar.setNavigationIcon(R.drawable.ic_back3);
-        CharSequence titleLable = "乘客";
-        setTitle(titleLable);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)     {
+            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
+            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+        }
+
+
+//        CharSequence titleLable = "";
+//        setTitle(titleLable);
         rsmLv = findViewById(R.id.swipe);
         data = new ArrayList<>();
 
@@ -109,7 +120,7 @@ private RefreshSwipeMenuListView rsmLv;
             public void onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch (index) {
                     case 0: //第一个选项
-                        Toast.makeText(DriverCheckActivity.this,"您点击的是置顶",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DriverCheckActivity.this,"您点击的是添加",Toast.LENGTH_SHORT).show();
                         break;
                     case 1: //第二个选项
                         del(position,rsmLv.getChildAt(position+1-rsmLv.getFirstVisiblePosition()));

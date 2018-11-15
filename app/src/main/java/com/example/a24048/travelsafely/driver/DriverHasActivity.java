@@ -1,14 +1,19 @@
 package com.example.a24048.travelsafely.driver;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
@@ -32,11 +37,17 @@ public class DriverHasActivity extends AppCompatActivity implements RefreshSwipe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_has);
-        CharSequence titleLable = "已选择的乘客";
-        Toolbar toolbar = findViewById(R.id.toolbar2);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)     {
+            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
+            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+        }
+
+ //       CharSequence titleLable = "乘客";
+        Toolbar toolbar = findViewById(R.id.toolbar_has);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
         toolbar.setNavigationIcon(R.drawable.ic_back3);
-        setTitle(titleLable);
+ //       setTitle(titleLable);
         rsmLv = findViewById(R.id.swipe);
         data = new ArrayList<>();
 
@@ -93,6 +104,14 @@ public class DriverHasActivity extends AppCompatActivity implements RefreshSwipe
                         break;
 
                 }
+            }
+        });
+        FloatingActionButton addPassage = findViewById(R.id.add_custom);
+        addPassage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DriverHasActivity.this,DriverCheckActivity.class);
+                startActivity(intent);
             }
         });
 

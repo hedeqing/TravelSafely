@@ -5,25 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".driver.DriverActivity">
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_driver"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:text="车主认证"
-        android:textSize="40dp"
-        android:textColor="@color/colorPrimary"/>
+        android:fitsSystemWindows="true"
+        android:background="@color/colorPrimaryDark"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        >
+    </android.support.v7.widget.Toolbar>
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="100dp">-->
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="100dp"-->
+        <!--android:text="车主认证"-->
+        <!--android:textSize="40dp"-->
+        <!--android:textColor="@color/colorPrimary"/>-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
     <RelativeLayout
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </RelativeLayout>
 
     <ImageView
+        android:paddingTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="100dp"
 
@@ -164,6 +176,6 @@
             android:layout_height="wrap_content"
             android:text="提交认证"
             android:layout_marginLeft="150dp"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="#000"/>
 </RelativeLayout>
 </RelativeLayout>

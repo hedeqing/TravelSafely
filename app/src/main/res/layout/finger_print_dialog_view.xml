@@ -76,7 +76,6 @@
         android:background="?attr/selectableItemBackground"
         android:gravity="center"
         android:padding="15dp"
-        android:text="Cancel"
         android:textAllCaps="true"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"

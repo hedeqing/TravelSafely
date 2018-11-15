@@ -5,13 +5,9 @@
     android:gravity="center_vertical"
     android:padding="10dip" >
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/back"
-        android:src="@drawable/ic_back2" />
-    <ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/ic_back2" />
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/back"-->
+        <!--android:src="@drawable/ic_back2" />-->
 </RelativeLayout>

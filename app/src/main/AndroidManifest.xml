@@ -67,11 +67,14 @@
     <uses-permission android:name="android.permission.ACCES_MOCK_LOCATION" />
 
     <application
+        android:fitsSystemWindows="true"
         android:allowBackup="true"
         android:icon="@drawable/ic_pinche"
         android:label="高校拼车平台"
-        tools:replace="android:label"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+
+        tools:replace="android:label">
+
         >
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
@@ -82,18 +85,24 @@
             android:enabled="true"
             android:process=":remote" />
 
-        <activity android:name=".LoginActivity">
+        <activity android:name=".person.PersonMessageActivity">
+            android:theme="@style/MaterialDrawerTheme.Light.DarkToolbar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".map.RoutePlanDemo" />
-        <activity android:name=".map.MapMainActivity"/>
-        <activity android:name=".driver.DriverActivity" />
+        <activity android:name=".map.RoutePlanDemo"/>
+
+        <activity android:name=".map.MapMainActivity" />
+
         <activity android:name=".SignUpActivity" />
         <activity android:name=".driver.DriverSendActivity" />
+        <activity android:name=".driver.DriverCheckActivity" />
+        <activity android:name=".driver.DriverHasActivity" />
         <activity android:name=".fingerDialog.FingerActivity" />
+        <activity android:name=".person.OrdersActivity"></activity>
     </application>
+
 </manifest>
